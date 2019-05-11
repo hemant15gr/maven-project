@@ -1,0 +1,42 @@
+Pipeline{
+   any agent{
+      Stages{
+           Stage('SCM checked'){
+            git'https://github.com/hemant15gr/Devopsrepo/blob/master/index.html'}
+
+
+           stage('compile source code'){
+
+          steps{
+              withmaven (maven:'LocalMaven'){
+              sh 'mvn compile'
+                    }
+                } }
+         
+           stage('test source code'){
+
+          steps{
+              withmaven (maven:'LocalMaven'){
+              sh 'mvn test'
+                    }
+                } }
+            stage('package source code'){
+
+            steps{
+              withmaven (maven:'LocalMaven'){
+                 sh 'mvn package'
+                    }
+                } }
+
+
+             stage('install source code'){
+
+          steps{
+              withmaven (maven:'LocalMaven'){
+              sh 'mvn install'
+                    }
+              
+             }  } 
+         }
+     }  
+}       
