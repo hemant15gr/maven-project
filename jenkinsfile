@@ -2,7 +2,7 @@ Pipeline{
    any agent{
       Stages{
            Stage('SCM checked'){
-            git'https://github.com/hemant15gr/Devopsrepo/blob/master/index.html'}
+            git'https://github.com/hemant15gr/maven-project/tree/master'}
 
 
            stage('compile source code'){
