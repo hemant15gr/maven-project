@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+
+    stages {
+        stage('SCM Checkout'){
+          git 'https://github.com/hemant15gr/maven-project'
+        }
+  }
+    {
+        stage ('Compile Stage') {
+
+            steps {
+                withMaven(maven : 'localmaven') {
+                    sh 'mvn clean compile'
+                }
+            }
+        }
+
+        stage ('Testing Stage') {
+
+            steps {
+                withMaven(maven : 'localmaven') {
+                    sh 'mvn test'
+                }
+            }
+        }
+
+
+        stage ('install Stage') {
+            steps {
+                withMaven(maven : 'localmaven') {
+                    sh 'mvn package'
+                }
+            }
+        }
+        
+        stage (‘build && SonarQube analysis’) {
+
+     withSonarQubeEnv ('sonarcubeserver') {
+         // Optionally use the Maven environment you've already configured
+         withMaven(maven: 'localmaven'){
+         sh 'mvn clean package sonar: sonar'
+    }
+    }
+    }
