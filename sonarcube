@@ -34,7 +34,7 @@ pipeline {
                 }
             }
         }
-        stage("build & SonarQube checkstyle") {
+        stage("build & SonarQube analysis") {
            steps {
               withSonarQubeEnv('sonarcubeserver') {
                 sh 'mvn clean package sonar:sonar'
