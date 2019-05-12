@@ -34,17 +34,12 @@ pipeline {
                 }
             }
         }
-        
-        stage (‘build && SonarQube analysis’) {
+        stage("build & SonarQube analysis") {
            steps {
-       
-     withSonarQubeEnv ('sonarcubeserver') {
-         // Optionally use the Maven environment you've already configured
-         withMaven(maven : 'localmaven'){
-         sh 'mvn clean package sonar:sonar'
-    }
-    }
-    }
-    }
+              withSonarQubeEnv('sonarcubeserver') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+          }
     }
     }
