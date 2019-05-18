@@ -43,7 +43,7 @@ pipeline {
           }
      stage('sonar'){
           steps{
-              withSonarQubeEnv(sonarqubeserver){
+              withSonarQubeEnv('sonarqubeserver'){
               withmaven (maven:'localmaven'){
               sh 'mvn clean package sonar:sonar'
                   }
