@@ -41,14 +41,7 @@ pipeline {
               }
             }
           }
-    stage("sonarstage") {
-           steps {
-              withSonarQubeEnv('sonarqubeserver') {
-                sh 'mvn clean package sonar:sonar'
-              }
-            }
-          }
-          stage('bulild and sonarcube analysis'){
+     stage('sonar'){
           steps{
               withSonarQubeEnv(sonarqubeserver){
               withmaven (maven:'localmaven'){
