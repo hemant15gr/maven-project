@@ -41,5 +41,21 @@ pipeline {
               }
             }
           }
+    stage("build & SonarQube analysis") {
+           steps {
+              withSonarQubeEnv('sonarqubeserver') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+          }
+          stage('bulild and sonarcube analysis'){
+          steps{
+              withSonarQubeEnv(sonarqubeserver){
+              withmaven (maven:'localmaven'){
+              sh 'mvn clean package sonar:sonar'
+                  }
+              }
+            }
+         }
     }
     }
